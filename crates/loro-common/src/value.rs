@@ -106,24 +106,40 @@ impl std::ops::Deref for LoroMapValue {
 }
 
 impl LoroBinaryValue {
+    pub fn new(value: Arc<Vec<u8>>) -> Self {
+        LoroBinaryValue(value)
+    }
+
     pub fn make_mut(&mut self) -> &mut Vec<u8> {
         Arc::make_mut(&mut self.0)
     }
 }
 
 impl LoroStringValue {
+    pub fn new(value: Arc<String>) -> Self {
+        LoroStringValue(value)
+    }
+
     pub fn make_mut(&mut self) -> &mut String {
         Arc::make_mut(&mut self.0)
     }
 }
 
 impl LoroListValue {
+    pub fn new(value: Arc<Vec<LoroValue>>) -> Self {
+        LoroListValue(value)
+    }
+
     pub fn make_mut(&mut self) -> &mut Vec<LoroValue> {
         Arc::make_mut(&mut self.0)
     }
 }
 
 impl LoroMapValue {
+    pub fn new(value: Arc<FxHashMap<String, LoroValue>>) -> Self {
+        LoroMapValue(value)
+    }
+
     pub fn make_mut(&mut self) -> &mut FxHashMap<String, LoroValue> {
         Arc::make_mut(&mut self.0)
     }
